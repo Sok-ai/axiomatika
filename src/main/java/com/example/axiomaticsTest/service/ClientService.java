@@ -20,11 +20,8 @@ public class ClientService {
     }
 
     public Client getClientById(Long id) {
-        Optional<Client> client = clientRepository.findById(id);
-        if (client.isEmpty()) {
-            throw new IllegalStateException("Нет такого пользователя");
-        }
-        return client.get();
+        return clientRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("Клиент не найден"));
     }
 
     public List<Client> searchClients(String phone, String fullName, String passport) {
@@ -37,13 +34,12 @@ public class ClientService {
         } else {
             return List.of();
         }
-
     }
 
-    public Client saveClient(Client client) {
+    public void saveClient(Client client) {
         if (client == null) {
             throw new IllegalStateException("Пустой пользователь");
         }
-        return clientRepository.save(client);
+        clientRepository.save(client);
     }
 }
