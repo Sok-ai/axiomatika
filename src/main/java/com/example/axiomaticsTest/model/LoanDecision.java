@@ -1,25 +1,34 @@
 package com.example.axiomaticsTest.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "loan_decision")
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoanDecision {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(name = "application_id")
-    private Integer applicationId;
+    private Long id;
+
+    @NotNull
     private Boolean approved;
-    private Double approved_amount;
-    private Integer term_months;
-    private LocalDateTime decision_date;
+
+    @Min(1)
+    @Max(12)
+    @Column(name = "term_in_months")
+    private Integer termInMonths;
+
+    @PositiveOrZero
+    @Column(name = "approved_amount")
+    private BigDecimal approvedAmount;
+
+    @OneToOne
+    @JoinColumn(name = "application_id", unique = true)
+    private LoanApplication application;
 }

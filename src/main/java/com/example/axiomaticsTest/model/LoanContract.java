@@ -1,23 +1,28 @@
 package com.example.axiomaticsTest.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "loan_contract")
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoanContract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(name = "application_id")
-    private Integer applicationId;
-    private Boolean signed;
-    private LocalDateTime signed_at;
+    private Long id;
+
+    @Column(name = "signed_date")
+    private LocalDate signedDate;
+
+    @NotNull
+    private Boolean signed = false;
+
+    @OneToOne
+    @JoinColumn(name = "application_id", unique = true)
+    private LoanApplication application;
 }
