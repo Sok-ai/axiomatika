@@ -2,15 +2,13 @@ package com.example.axiomaticsTest.repository;
 
 import com.example.axiomaticsTest.model.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
-import java.util.Optional;
-
+import java.util.List;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
-    Optional<Client> findByPhone(String phone);
+    List<Client> findByPhone(String phone);
 
-    Optional<Client> findByPassport(String passport);
+    List<Client> findByPassport(String passport);
 
-    Optional<Client> findByFullName(String fullName);
+    List<Client> findByFullNameContainingIgnoreCase(String fullName);
 }
