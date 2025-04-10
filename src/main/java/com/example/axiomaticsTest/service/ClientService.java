@@ -5,7 +5,6 @@ import com.example.axiomaticsTest.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -26,7 +25,7 @@ public class ClientService {
 
     public List<Client> searchClients(String phone, String fullName, String passport) {
         if (phone != null && !phone.isEmpty()) {
-            return clientRepository.findByPhone(phone);
+            return clientRepository.findByPhoneContainingIgnoreCase(phone);
         } else if (fullName != null && !fullName.isEmpty()) {
             return clientRepository.findByFullNameContainingIgnoreCase(fullName);
         } else if (passport != null && !passport.isEmpty()) {
