@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список клиентов</title>
+</head>
+<body>
+<h1>Список клиентов</h1>
+
+<form action="/clients/search" method="POST">
+    <label for="fullName">Полное имя:</label>
+    <input type="text" id="fullName" name="fullName">
+
+    <label for="passport">Паспорт:</label>
+    <input type="text" id="passport" name="passport">
+
+    <label for="phone">Телефон:</label>
+    <input type="text" id="phone" name="phone">
+
+    <button type="submit">Поиск</button>
+    <button type="reset">Очистить</button>
+    <a href="/clients">Показать всех пользователей</a>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>ФИО</th>
+        <th>Паспорт</th>
+        <th>Телефон</th>
+        <th>Пол</th>
+        <th>Семейное положение</th>
+        <th>Адрес проживания</th>
+        <th>Адрес регистрации</th>
+        <th>Период работы</th>
+        <th>Должность</th>
+        <th>Организация</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="client : ${clients}">
+        <td th:text="${client.fullName}">ФИО</td>
+        <td th:text="${client.passport}">Паспорт</td>
+        <td th:text="${client.phone}">Телефон</td>
+        <td th:text="${client.gender}">Пол</td>
+        <td th:text="${client.maritalStatus}">Семейное положение</td>
+        <td th:text="${client.residenceAddress}">Адрес проживания</td>
+        <td th:text="${client.registrationAddress}">Адрес регистрации</td>
+        <td th:text="${client.employmentPeriod}">Период работы</td>
+        <td th:text="${client.position}">Должность</td>
+        <td th:text="${client.organizationName}">Организация</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
