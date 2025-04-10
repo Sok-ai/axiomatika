@@ -1,0 +1,41 @@
+<!-- templates/applications/approved.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Одобренные заявки</title>
+</head>
+<body>
+<h1>Одобренные заявки</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ФИО</th>
+        <th>Телефон</th>
+        <th>Сумма заявки</th>
+        <th>Цель кредита</th>
+        <th>Одобренная сумма</th>
+        <th>Срок (мес.)</th>
+        <th>Дата заявки</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="app : ${loads}">
+        <td th:text="${app.client.fullName}">ФИО</td>
+        <td th:text="${app.client.phone}">Телефон</td>
+        <td th:text="${app.desiredAmount}">Желаемая сумма</td>
+        <td th:text="${app.creditPurpose}">Цель кредита</td>
+        <td th:text="${app.decision.approvedAmount}">Одобрено</td>
+        <td th:text="${app.decision.termInMonths}">Срок</td>
+        <td th:text="${#dates.format(app.createdAt, 'dd.MM.yyyy')}">Дата</td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a href="/applications">← Все заявки</a>
+
+</body>
+</html>
+

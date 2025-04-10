@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Новая заявка на кредит</title>
+</head>
+<body>
+<h1>Оформление заявки</h1>
+
+<form th:action="@{/applications/new}" th:object="${application}" method="post">
+    <h3>Информация о клиенте</h3>
+    <label>ФИО:
+        <input type="text" th:field="*{client.fullName}" required/>
+    </label><br/>
+
+    <label>Паспорт:
+        <input type="text" th:field="*{client.passport}" required/>
+    </label><br/>
+
+    <label>Пол:
+        <input type="text" th:field="*{client.gender}" />
+    </label><br/>
+
+    <label>Семейное положение:
+        <input type="text" th:field="*{client.maritalStatus}" />
+    </label><br/>
+
+    <label>Адрес проживания:
+        <input type="text" th:field="*{client.residenceAddress}" />
+    </label><br/>
+
+    <label>Адрес регистрации:
+        <input type="text" th:field="*{client.registrationAddress}" />
+    </label><br/>
+
+    <label>Телефон:
+        <input type="text" th:field="*{client.phone}" required/>
+    </label><br/>
+
+    <label>Стаж работы:
+        <input type="text" th:field="*{client.employmentPeriod}" />
+    </label><br/>
+
+    <label>Должность:
+        <input type="text" th:field="*{client.position}" />
+    </label><br/>
+
+    <label>Название организации:
+        <input type="text" th:field="*{client.organizationName}" />
+    </label><br/>
+
+    <h3>Информация о кредите</h3>
+    <label>Желаемая сумма:
+        <input type="number" min="0" th:field="*{desiredAmount}" step="0.01" required/>
+    </label><br/>
+
+    <label>Цель кредита:
+        <input type="text" th:field="*{creditPurpose}" required/>
+    </label><br/>
+
+    <button type="submit">Отправить заявку</button>
+</form>
+</body>
+</html>
