@@ -13,6 +13,11 @@ public class ClientController {
         this.clientService = clientService;
     }
 
+    @GetMapping
+    public String index() {
+        return "index";
+    }
+
     @GetMapping(path = "clients")
     public String showClients(Model model) {
         model.addAttribute("clients", clientService.getAllClients());
