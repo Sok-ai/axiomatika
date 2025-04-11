@@ -12,10 +12,13 @@ import java.util.List;
 public class LoanApplicationService {
     private final LoanApplicationRepository loanApplicationRepository;
     private final ClientRepository clientRepository;
+    private final LoanDecisionService loanDecisionService;
 
-    public LoanApplicationService(LoanApplicationRepository loanApplicationRepository, ClientRepository clientRepository) {
+
+    public LoanApplicationService(LoanDecisionService loanDecisionService, LoanApplicationRepository loanApplicationRepository, ClientRepository clientRepository) {
         this.loanApplicationRepository = loanApplicationRepository;
         this.clientRepository = clientRepository;
+        this.loanDecisionService = loanDecisionService;
     }
 
     public List<LoanApplication> getAllApplications() {
@@ -23,7 +26,12 @@ public class LoanApplicationService {
     }
 
     public List<LoanApplication> getApprovedApplications() {
-        return loanApplicationRepository.findAll().stream().filter(loan -> loan.getDecision() != null && loan.getDecision().getApproved()).toList();
+        List<LoanApplication> approvedApplications = loanApplicationRepository.findAll()
+                .stream()
+                .filter(loan -> loan.getDecision() != null && loan.getDecision().getApproved())
+                .toList();
+
+        return approvedApplications;
     }
 
     public void createApplication(LoanApplication application) {
@@ -33,5 +41,6 @@ public class LoanApplicationService {
         loanApplication.setDesiredAmount(application.getDesiredAmount());
         loanApplication.setCreditPurpose(application.getCreditPurpose());
         loanApplicationRepository.save(loanApplication);
+        loanDecisionService.createLoanDecision(loanApplication.getId());
     }
 }
