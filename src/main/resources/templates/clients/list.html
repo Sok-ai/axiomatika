@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/style.css}"/>
     <title>Список клиентов</title>
 </head>
 <body>
@@ -20,8 +21,8 @@
 
     <button type="submit">Поиск</button>
     <button type="reset">Очистить</button>
-    <a href="/clients">Показать всех пользователей</a>
 </form>
+<a href="/clients">Показать всех пользователей</a>
 
 <table>
     <thead>
@@ -53,5 +54,7 @@
     </tr>
     </tbody>
 </table>
+
+<a href="/">⬅ На главную</a>
 </body>
 </html>

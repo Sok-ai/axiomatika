@@ -1,7 +1,7 @@
 package com.example.axiomaticsTest.service;
 
-import com.example.axiomaticsTest.model.Client;
-import com.example.axiomaticsTest.model.LoanApplication;
+import com.example.axiomaticsTest.models.Client;
+import com.example.axiomaticsTest.models.LoanApplication;
 import com.example.axiomaticsTest.repository.ClientRepository;
 import com.example.axiomaticsTest.repository.LoanApplicationRepository;
 import org.springframework.stereotype.Service;
