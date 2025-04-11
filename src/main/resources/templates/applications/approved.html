@@ -1,41 +1,42 @@
-<!-- templates/applications/approved.html -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style.css}"/>
     <title>Одобренные заявки</title>
 </head>
 <body>
-<h1>Одобренные заявки</h1>
 
-<table border="1">
+<h2>Список одобренных заявок</h2>
+
+<table>
     <thead>
     <tr>
-        <th>ФИО</th>
-        <th>Телефон</th>
-        <th>Сумма заявки</th>
-        <th>Цель кредита</th>
-        <th>Одобренная сумма</th>
-        <th>Срок (мес.)</th>
-        <th>Дата заявки</th>
+        <th>Клиент</th>
+        <th>Сумма</th>
+        <th>Решение</th>
+        <th>Подписание</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="app : ${loads}">
-        <td th:text="${app.client.fullName}">ФИО</td>
-        <td th:text="${app.client.phone}">Телефон</td>
-        <td th:text="${app.desiredAmount}">Желаемая сумма</td>
-        <td th:text="${app.creditPurpose}">Цель кредита</td>
+    <tr th:each="app : ${loans}">
+        <td th:text="${app.client.fullName}">Имя</td>
+        <td th:text="${app.desiredAmount}">Сумма</td>
         <td th:text="${app.decision.approvedAmount}">Одобрено</td>
         <td th:text="${app.decision.termInMonths}">Срок</td>
-        <td th:text="${#dates.format(app.createdAt, 'dd.MM.yyyy')}">Дата</td>
+        <td>
+            <span th:if="${app.contract != null and app.contract.signed}">Подписано ✅</span>
+            <form th:if="${app.contract == null}"
+                  th:action="@{/applications/{id}/sign(id=${app.id})}"
+                  method="post">
+                <button type="submit">Подписать</button>
+            </form>
+        </td>
     </tr>
+
     </tbody>
 </table>
-
-<br>
-<a href="/applications">← Все заявки</a>
+<a href="/">⬅ На главную</a>
 
 </body>
 </html>
-

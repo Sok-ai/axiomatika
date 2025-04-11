@@ -1,8 +1,8 @@
-<!-- templates/applications/list.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style.css}"/>
     <title>Все заявки</title>
 </head>
 <body>
@@ -20,22 +20,21 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="app : ${loads}">
+    <tr th:each="app : ${loans}">
         <td th:text="${app.client.fullName}">ФИО</td>
         <td th:text="${app.client.phone}">Телефон</td>
         <td th:text="${app.desiredAmount}">Сумма заявки</td>
         <td th:text="${app.creditPurpose}">Цель кредита</td>
         <td>
             <span th:if="${app.decision != null and app.decision.approved}">Одобрено</span>
-            <span th:if="${app.decision == null or not app.decision.approved}">Не одобрено</span>
+            <span th:if="${app.decision == null or !app.decision.approved}">Не одобрено</span>
         </td>
-        <td th:text="${#temporals.format(app.createdAt, 'dd.MM.yyyy')}">Дата заявки</td>
+        <td th:text="${#temporals.format(app.createdAt, 'dd.MM.yyyy')}">Дата</td>
     </tr>
     </tbody>
 </table>
 
 <br>
-<a href="/applications/approved">Посмотреть одобренные заявки</a>
-
+<a href="/">⬅ На главную</a>
 </body>
 </html>
