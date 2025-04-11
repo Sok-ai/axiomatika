@@ -1,6 +1,6 @@
 package com.example.axiomaticsTest.service;
 
-import com.example.axiomaticsTest.model.Client;
+import com.example.axiomaticsTest.models.Client;
 import com.example.axiomaticsTest.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +18,6 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-    public Client getClientById(Long id) {
-        return clientRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("Клиент не найден"));
-    }
-
     public List<Client> searchClients(String phone, String fullName, String passport) {
         if (phone != null && !phone.isEmpty()) {
             return clientRepository.findByPhoneContainingIgnoreCase(phone);
@@ -33,12 +28,5 @@ public class ClientService {
         } else {
             return List.of();
         }
-    }
-
-    public void saveClient(Client client) {
-        if (client == null) {
-            throw new IllegalStateException("Пустой пользователь");
-        }
-        clientRepository.save(client);
     }
 }
