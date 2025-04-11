@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Подписанные договоры</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+
+<h2>Список подписанных кредитных договоров</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID Договора</th>
+        <th>ФИО клиента</th>
+        <th>Сумма</th>
+        <th>Срок</th>
+        <th>Дата подписания</th>
+        <th>Статус</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="contract : ${contracts}">
+        <td th:text="${contract.id}"></td>
+        <td th:text="${contract.application.client.fullName}"></td>
+        <td th:text="${contract.application.decision.approvedAmount}"></td>
+        <td th:text="${contract.application.decision.termInMonths} + ' мес.'"></td>
+        <td th:text="${contract.signedDate}"></td>
+        <td>
+            <span th:if="${contract.signed}">✅ Подписано</span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a href="/">⬅ На главную</a>
+
+</body>
+</html>
