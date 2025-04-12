@@ -4,64 +4,91 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/style.css}"/>
     <title>Новая заявка на кредит</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
+<a href="/" style="position: fixed">⬅ На главную</a>
 <h1>Оформление заявки</h1>
 
 <form th:action="@{/applications/new}" th:object="${application}" method="post">
     <h3>Информация о клиенте</h3>
-    <label>ФИО:
+
+    <label>ФИО: <span th:if="${#fields.hasErrors('client.fullName')}" th:errors="*{client.fullName}" class="error">fullName Error</span>
         <input type="text" th:field="*{client.fullName}" required/>
     </label><br/>
 
-    <label>Паспорт:
+    <label>Паспорт: <span th:if="${#fields.hasErrors('client.passport')}" th:errors="*{client.passport}"
+                          class="error"></span>
         <input type="text" th:field="*{client.passport}" required/>
     </label><br/>
 
-    <label>Пол:
-        <input type="text" th:field="*{client.gender}" />
+    <label style="display: inline-block; margin: 20px 0;">Пол: <span
+            th:if="${#fields.hasErrors('client.gender')}"
+            th:errors="*{client.gender}" class="error"></span>
+        <select th:field="*{client.gender}" id="gender">
+            <option value="">Выбор пола</option>
+            <option value="Мужской">Мужской</option>
+            <option value="Женский">Женский</option>
+        </select>
+    </label>
+    <br/>
+
+    <label>Семейное положение: <span th:if="${#fields.hasErrors('client.maritalStatus')}"
+                                     th:errors="*{client.maritalStatus}"
+                                     class="error"></span>
+        <input type="text" th:field="*{client.maritalStatus}" style="text-transform: capitalize"/>
     </label><br/>
 
-    <label>Семейное положение:
-        <input type="text" th:field="*{client.maritalStatus}" />
+    <label>Адрес проживания: <span th:if="${#fields.hasErrors('client.residenceAddress')}"
+                                   th:errors="*{client.residenceAddress}"
+                                   class="error"></span>
+        <input type="text" th:field="*{client.residenceAddress}"/>
     </label><br/>
 
-    <label>Адрес проживания:
-        <input type="text" th:field="*{client.residenceAddress}" />
+    <label>Адрес регистрации: <span th:if="${#fields.hasErrors('client.registrationAddress')}"
+                                    th:errors="*{client.registrationAddress}" class="error"></span>
+        <input type="text" th:field="*{client.registrationAddress}"/>
     </label><br/>
 
-    <label>Адрес регистрации:
-        <input type="text" th:field="*{client.registrationAddress}" />
+    <label>Телефон: <span th:if="${#fields.hasErrors('client.phone')}" th:errors="*{client.phone}" class="error"></span>
+        <input type="text" th:field="*{client.phone}"
+               required/>
     </label><br/>
 
-    <label>Телефон:
-        <input type="text" th:field="*{client.phone}" required/>
+    <label>Стаж работы: <span th:if="${#fields.hasErrors('client.employmentPeriod')}"
+                              th:errors="*{client.employmentPeriod}"
+                              class="error"></span>
+        <input type="text" th:field="*{client.employmentPeriod}"/>
     </label><br/>
 
-    <label>Стаж работы:
-        <input type="text" th:field="*{client.employmentPeriod}" />
+    <label>Должность: <span th:if="${#fields.hasErrors('client.position')}" th:errors="*{client.position}"
+                            class="error"></span>
+        <input type="text" th:field="*{client.position}"/>
     </label><br/>
 
-    <label>Должность:
-        <input type="text" th:field="*{client.position}" />
-    </label><br/>
-
-    <label>Название организации:
-        <input type="text" th:field="*{client.organizationName}" />
+    <label>Название организации: <span th:if="${#fields.hasErrors('client.organizationName')}"
+                                       th:errors="*{client.organizationName}"
+                                       class="error"></span>
+        <input type="text" th:field="*{client.organizationName}"/>
     </label><br/>
 
     <h3>Информация о кредите</h3>
-    <label>Желаемая сумма:
+
+    <label>Желаемая сумма: <span th:if="${#fields.hasErrors('desiredAmount')}" th:errors="*{desiredAmount}"
+                                 class="error"></span>
         <input type="number" min="0" th:field="*{desiredAmount}" step="0.01" required/>
     </label><br/>
 
-    <label>Цель кредита:
+    <label>Цель кредита: <span th:if="${#fields.hasErrors('creditPurpose')}" th:errors="*{creditPurpose}"
+                               class="error"></span>
         <input type="text" th:field="*{creditPurpose}" required/>
     </label><br/>
 
     <button type="submit">Отправить заявку</button>
 </form>
-
-<a href="/">⬅ На главную</a>
 </body>
 </html>
