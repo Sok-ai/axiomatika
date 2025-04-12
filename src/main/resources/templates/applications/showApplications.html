@@ -28,7 +28,7 @@
         <td th:text="${app.creditPurpose}">Цель кредита</td>
         <td>
             <span th:if="${app.decision != null and app.decision.approved}" style="color: darkgreen">Одобрено</span>
-            <span th:if="${app.decision == null or !app.decision.approved}" style="color: darkre">Не одобрено</span>
+            <span th:if="${app.decision == null or !app.decision.approved}" style="color: darkred">Не одобрено</span>
         </td>
         <td th:text="${#temporals.format(app.createdAt, 'dd.MM.yyyy')}">Дата</td>
     </tr>
