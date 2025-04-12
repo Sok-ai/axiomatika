@@ -7,6 +7,7 @@
     <title>Список клиентов</title>
 </head>
 <body>
+<a href="/" style="position: fixed">⬅ На главную</a>
 <h1>Список клиентов</h1>
 
 <form action="/clients/search" method="POST">
@@ -19,10 +20,10 @@
     <label for="phone">Телефон:</label>
     <input type="text" id="phone" name="phone">
 
-    <button type="submit">Поиск</button>
-    <button type="reset">Очистить</button>
+    <button type="submit" style="width: 50%; margin: 10px auto;">Поиск</button>
+    <button type="reset" style="width: 50%; margin: auto;">Очистить поля</button>
+    <a href="/clients" style="text-align: center">Вернуть всех пользователей</a>
 </form>
-<a href="/clients">Показать всех пользователей</a>
 
 <table>
     <thead>
@@ -54,7 +55,5 @@
     </tr>
     </tbody>
 </table>
-
-<a href="/">⬅ На главную</a>
 </body>
 </html>

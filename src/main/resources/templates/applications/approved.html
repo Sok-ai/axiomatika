@@ -6,7 +6,7 @@
     <title>Одобренные заявки</title>
 </head>
 <body>
-
+<a href="/" style="position: fixed">⬅ На главную</a>
 <h2>Список одобренных заявок</h2>
 
 <table>
@@ -26,7 +26,7 @@
         <td th:text="${app.decision.termInMonths}">Срок</td>
         <td>
             <span th:if="${app.contract != null and app.contract.signed}">Подписано ✅</span>
-            <form th:if="${app.contract == null}"
+            <form style="all: initial;" th:if="${app.contract == null}"
                   th:action="@{/applications/{id}/sign(id=${app.id})}"
                   method="post">
                 <button type="submit">Подписать</button>
@@ -36,7 +36,5 @@
 
     </tbody>
 </table>
-<a href="/">⬅ На главную</a>
-
 </body>
 </html>
