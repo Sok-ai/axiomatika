@@ -26,7 +26,11 @@ public class ClientController {
 
     @PostMapping("/clients/search")
     public String searchClients(@RequestParam(required = false) String phone, @RequestParam(required = false) String fullName, @RequestParam(required = false) String passport, Model model) {
-        model.addAttribute("clients", clientService.searchClients(phone, fullName, passport));
+        if (phone == null && fullName == null && passport == null) {
+            model.addAttribute("clients", clientService.getAllClients());
+        } else {
+            model.addAttribute("clients", clientService.searchClients(phone, fullName, passport));
+        }
         return "clients/list";
     }
 }
