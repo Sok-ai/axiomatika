@@ -25,6 +25,7 @@ public class LoanDecision {
     private Integer termInMonths;
 
     @PositiveOrZero
+    @DecimalMin(value = "0.01", message = "Одобренная сумма должна быть больше 0")
     @Column(name = "approved_amount")
     private BigDecimal approvedAmount;
 

@@ -20,6 +20,7 @@ public class LoanContract {
     private LocalDate signedDate;
 
     @NotNull
+    @Column(name = "signed", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
     private Boolean signed = false;
 
     @OneToOne
