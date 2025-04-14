@@ -23,7 +23,7 @@ public class LoanDecisionService {
     public void createLoanDecision(Long applicationId) {
         Random random = new Random();
         LoanApplication application = loanApplicationRepository.findById(applicationId)
-                .orElseThrow(() -> new IllegalArgumentException("Заявка не найдена"));
+                .orElse(null);
         LoanDecision decision = new LoanDecision();
         boolean isApproved = random.nextBoolean();
         decision.setApproved(isApproved);
