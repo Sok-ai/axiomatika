@@ -26,21 +26,22 @@ public class LoanApplicationService {
     }
 
     public List<LoanApplication> getApprovedApplications() {
-        List<LoanApplication> approvedApplications = loanApplicationRepository.findAll()
+        return loanApplicationRepository.findAll()
                 .stream()
                 .filter(loan -> loan.getDecision() != null && loan.getDecision().getApproved())
                 .toList();
-
-        return approvedApplications;
     }
 
     public void createApplication(LoanApplication application) {
         Client savedClient = clientRepository.save(application.getClient());
+
         LoanApplication loanApplication = new LoanApplication();
         loanApplication.setClient(savedClient);
         loanApplication.setDesiredAmount(application.getDesiredAmount());
         loanApplication.setCreditPurpose(application.getCreditPurpose());
-        loanApplicationRepository.save(loanApplication);
-        loanDecisionService.createLoanDecision(loanApplication.getId());
+
+        LoanApplication savedApp = loanApplicationRepository.save(loanApplication);
+
+        loanDecisionService.createLoanDecision(savedApp.getId());
     }
 }
