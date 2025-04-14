@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ошибка</title>
+</head>
+<body>
+<h1>Что-то пошло не так!</h1>
+<p th:if="${status == 404}">Страница не найдена (404).</p>
+<p th:if="${status == 500}">Ошибка сервера (500).</p>
+<p>Сообщение: <span th:text="${error}"></span></p>
+<a href="/">Вернуться на главную</a>
+</body>
+</html>
