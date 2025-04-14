@@ -29,11 +29,11 @@ public class Client {
     @Pattern(regexp = "\\d{10}", message = "Паспорт должен содержать 10 цифр")
     private String passport;
 
-    @Pattern(regexp = "Мужской|Женский", message = "Пол должен быть 'Мужской' или 'Женский'")
+    @Pattern(regexp = "Мужской|Женский", message = "Выберите пол")
     private String gender;
 
     @Size(max = 50, message = "Семейное положение не должно превышать 50 символов")
-    @Pattern(regexp = "Холост|Не замужем|Женат|Гражданский брак|Замужем|Разведен|Разведена|Вдовец|Вдова", message = "Введите семейное положение")
+    @Pattern(regexp = "^(?i)\\s*Женат/Замужем|Холост/Не замужем|Разведен/Разведена|Вдовец/Вдова\\s*$", message = "Выберите семейное положение")
     @Column(name = "marital_status")
     private String maritalStatus;
 
@@ -46,7 +46,7 @@ public class Client {
     private String registrationAddress;
 
     @NotBlank(message = "Телефон обязателен")
-    @Pattern(regexp = "\\+7\\d{10}", message = "Телефон должен начинаться с '+7' и содержать  10 цифр")
+    @Pattern(regexp = "^(?:\\+7|8)[-\\s]?\\(?\\d{3}\\)?[-\\s]?\\d{3}[-\\s]?\\d{2}[-\\s]?\\d{2}$", message = "Неверно указан номер телефона")
     private String phone;
 
     @Min(value = 0, message = "Стаж не может быть отрицательным")
