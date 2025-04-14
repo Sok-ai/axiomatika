@@ -48,7 +48,7 @@
    Если проект находится в репозитории:
 ```
 git clone <url-репозитория>
-cd LoanApplicationSystem
+cd .\axiomatika\
 ```
 
 Или скопируйте проект в локальную папку.
