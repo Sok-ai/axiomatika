@@ -40,7 +40,13 @@
     <label>Семейное положение: <span th:if="${#fields.hasErrors('client.maritalStatus')}"
                                      th:errors="*{client.maritalStatus}"
                                      class="error"></span>
-        <input type="text" th:field="*{client.maritalStatus}" style="text-transform: capitalize"/>
+        <select th:field="*{client.maritalStatus}">
+            <option value="">Выбор семейного положения</option>
+            <option value="Женат/Замужем">Женат/Замужем</option>
+            <option value="Холост/Не замужем">Холост/Не замужем</option>
+            <option value="Разведен/Разведена">Разведен/Разведена</option>
+            <option value="Вдовец/Вдова">Вдовец/Вдова</option>
+        </select><br>
     </label><br/>
 
     <label>Адрес проживания: <span th:if="${#fields.hasErrors('client.residenceAddress')}"
